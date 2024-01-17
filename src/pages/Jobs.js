@@ -10,7 +10,6 @@ const Jobs = () => {
   const userType = localStorage.getItem("userType");
   const userId = localStorage.getItem("userId");
   const { validToken, userInfo, reloadUserData } = useData();
-  console.log(userInfo);
   const [jobs, setJobs] = useState([]);
   const [ignored, forceUpdate] = useReducer((x) => x + 1, 0);
   useEffect(() => {
@@ -56,29 +55,22 @@ const Jobs = () => {
   return (
     <>
       <NavOne />
-      <div
-        className="border-b shadow"
-        style={{
-          backgroundImage: "url(/assets/images/bg.jpg)",
-          backgroundSize: "cover",
-        }}
-      >
-        <div
-          style={{ height: "200px", backgroundColor: "rgba(255,255,255,0.8)" }}
-          className="p-4 text-xl lg:text-2xl font-bold flex justify-center items-center"
-        >
-          Find and Apply for Jobs
+      <div className="mb-3 p-4 bg-blue-600 text-white h-48 lg:h-80 flex flex-col gap-5 justify-center items-center">
+        <div className="text-center text-lg font-medium lg:text-2xl lg:font-semibold">
+          {" "}
+          Discover Opportunities, Ignite Careers
+        </div>{" "}
+        <div className="px-4 pl-2 rounded-full text-black text-sm bg-white font-normal">
+          <input
+            className="outline-none p-2 bg-transparent"
+            placeholder="Location, Role, Company"
+          />
+          <button className="text-black">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
         </div>
       </div>
       <div className="flex flex-col lg:flex-row gap-2">
-        <div className="w-full lg:w-1/5 border-r p-4">
-          <div className="border border-slate-300 px-2 rounded">
-            <input
-              className="outline-none p-2"
-              placeholder="Location, Role, Company"
-            />
-          </div>
-        </div>
         <div className="p-4 flex gap-3 lg:flex-row flex-col">
           {jobs.map((data) => (
             <div

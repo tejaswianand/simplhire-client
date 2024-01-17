@@ -1,3 +1,3 @@
-const API_URL = "http://192.168.1.6:5001";
+const API_URL = "https://api-simplhire.abierta.cloud";
 
 export default API_URL;

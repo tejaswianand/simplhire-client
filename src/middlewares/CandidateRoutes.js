@@ -17,6 +17,7 @@ const CandidateRoutes = (props) => {
         const decodedToken = jwt.decode(token);
         if (decodedToken.exp < Date.now() / 1000) {
           console.log("Token expired, redirecting to login");
+          localStorage.clear();
           return navigate("/auth/login");
         }
         setIsLoggedIn(true);

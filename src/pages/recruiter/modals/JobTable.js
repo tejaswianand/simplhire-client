@@ -4,10 +4,11 @@ import moment from "moment";
 import axios from "axios";
 import API_URL from "../../../apiConfig";
 import ViewJob from "./ViewJob";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const JobTable = () => {
   const { listedJobs, reloadJobs } = useData();
+  const navigate = useNavigate();
   const changeStatus = async (id) => {
     try {
       const res = await axios.put(`${API_URL}/jobs/change-status/${id}`);
@@ -30,67 +31,36 @@ const JobTable = () => {
       ) : (
         ""
       )}
-      <div class="container">
-        <table class="w-full flex flex-row flex-no-wrap sm:bg-white rounded-lg overflow-hidden sm:shadow-lg my-5">
-          <thead class="text-white">
-            {listedJobs.map((data) => (
-              <tr class="bg-green-700 flex flex-col flex-no wrap sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0">
-                <th class="p-3 text-left">Company</th>
-                <th class="p-3 text-left">Role</th>
-                <th class="p-3 text-left">Location</th>
-                <th class="p-3 text-left">Created On</th>
-                <th class="p-3 text-left">Actions</th>
-                <th class="p-3 text-left">Status</th>
-              </tr>
-            ))}
-          </thead>
-          <tbody class="flex-1 sm:flex-none">
-            {listedJobs.map((data) => (
-              <tr class="flex flex-col flex-no wrap sm:table-row mb-2 sm:mb-0">
-                <td class="border-grey-light border hover:bg-gray-100 p-3">
-                  {data.companyName}
-                </td>
-                <td class="border-grey-light border hover:bg-gray-100 p-3 truncate">
-                  {data.role}{" "}
-                </td>
-                <td class="border-grey-light border hover:bg-gray-100 p-3">
-                  {data.location}
-                </td>
-                <td class="border-grey-light border hover:bg-gray-100 p-3">
-                  {moment(data.createdAt).format("MMM Do YY")}{" "}
-                </td>
-                <td class="border-grey-light border p-3 flex gap-2">
-                  <NavLink
-                    to={`/recruiter/jobs/view/${data._id}`}
-                    className="bg-green-50 text-green-600 hover:bg-green-100 hover:text-green-800 p-2 rounded w-7 h-7 flex items-center justify-center"
-                  >
-                    <i className="fas fa-eye" />
-                  </NavLink>
-                  <p className="bg-yellow-50 text-yellow-600 hover:bg-yellow-100 hover:text-yellow-800 p-2 rounded w-7 h-7 flex items-center justify-center">
-                    <i className="fas fa-pen-to-square" />
-                  </p>
-                </td>
-                <td class="border-grey-light border hover:bg-gray-100 p-3">
-                  {data.isActive == true ? (
-                    <p
-                      onClick={() => changeStatus(data._id)}
-                      className="text-2xl text-green-600"
-                    >
-                      <i className="fas fa-toggle-on" />
-                    </p>
-                  ) : (
-                    <p
-                      onClick={() => changeStatus(data._id)}
-                      className="text-2xl text-red-600"
-                    >
-                      <i className="fas fa-toggle-off" />
-                    </p>
-                  )}{" "}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      <div className="flex flex-col lg:flex-row gap-3">
+        {listedJobs.map((data) => (
+          <div
+            className="rounded p-2 border border-slate-200 w-full lg:w-1/4"
+            key={data._id}
+          >
+            <div className="uppercase text-slate-400 text-xs lg:text-sm">
+              {data._id}
+            </div>
+            <div className="mt-2 font-bold lg:text-xl">
+              {data.role} @ {data.companyName}
+            </div>
+            <div className="flex mt-2">
+              <div>Salary Range:&nbsp;</div>
+              <div className="flex">
+                {" "}
+                <div>{data.minSalary} to </div>
+                <div>&nbsp;{data.maxSalary} (LPA)</div>
+              </div>
+            </div>
+            <div className="mt-3 flex gap-3">
+              <div
+                onClick={() => navigate(`/recruiter/jobs/view/${data._id}`)}
+                className="cursor-pointer hover:bg-blue-100 hover:text-blue-800 text-blue-600 bg-blue-50 border border-blue-200 p-1 px-3 w-fit rounded text-xs lg:text-sm"
+              >
+                View Job
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
     </>
   );

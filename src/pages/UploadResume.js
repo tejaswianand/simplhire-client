@@ -64,7 +64,7 @@ const UploadResume = () => {
   return (
     <>
       <NavOne />
-      <div className="modal-container w-11/12 lg:w-1/2 mx-auto  rounded mt-10 border border-green-200">
+      <div className="modal-container-2 w-11/12 lg:w-1/2 mx-auto  rounded mt-10 border border-green-200">
         <div className="flex gap-5 ">
           <div
             onClick={() => navigate(-1)}

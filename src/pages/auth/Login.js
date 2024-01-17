@@ -102,13 +102,13 @@ const Login = () => {
               />
               <label className="block star">Password</label>
               <input
-                className="rounded border-2 p-2 w-full focus:border-blue-600 focus:border-2 outline-none mb-3"
+                className="rounded border-2 p-2 w-full focus:border-green-600 focus:border-2 outline-none mb-3"
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
 
-              <button className="bg-green-700 text-white font-medium hover:bg-green-800 p-3 w-full rounded-full text-center flex justify-center">
+              <button className="bg-green-600 text-white font-medium hover:bg-green-700 p-3 w-full rounded-full text-center flex justify-center">
                 {loading ? <div className="button-loader"></div> : "Login"}
               </button>
             </form>
@@ -126,13 +126,13 @@ const Login = () => {
               />
               <label className="block star">Password</label>
               <input
-                className="rounded border-2 p-2 w-full focus:border-blue-600 focus:border-2 outline-none mb-3"
+                className="rounded border-2 p-2 w-full focus:border-green-600 focus:border-2 outline-none mb-3"
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
 
-              <button className="bg-green-700 text-white font-medium hover:bg-green-800 p-3 w-full rounded-full text-center flex justify-center">
+              <button className="bg-green-600 text-white font-medium hover:bg-green-700 p-3 w-full rounded-full text-center flex justify-center">
                 {loading ? <div className="button-loader"></div> : "Login"}
               </button>
             </form>
